@@ -8,11 +8,11 @@ const ProductListingPage = () => {
   const { pokemonList, getPokemonDetails } = usePokemonContext();
 
   // iterates over the pokemonlist to get pokemon details
-  // useEffect(() => {
-  //   pokemonList.forEach((pokemon) => {
-  //     getPokemonDetails(pokemon.name);
-  //   });
-  // }, [pokemonList, getPokemonDetails]); // dependencies
+  useEffect(() => {
+    pokemonList.forEach((pokemon) => {
+      getPokemonDetails(pokemon.name);
+    });
+  }, [pokemonList, getPokemonDetails]); // dependencies
 
   const getImageUrl = (id) => {
     // pokemon image is in 001 format
