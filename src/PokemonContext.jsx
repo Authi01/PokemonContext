@@ -17,12 +17,12 @@ export function PokemonProvider({ children }) {
   const [abilities, setAbilities] = useState([]);
   const [forms, setForms] = useState([]);
 
-  useEffect(() => {
-    // api to fetch the list of Pokemon
+  // api to fetch pokemon list
+  const fetchPokemonList = () => {
     axios.get("https://pokeapi.co/api/v2/pokemon/").then((response) => {
       setPokemonList(response.data.results);
     });
-  }, []);
+  };
 
   const getPokemonDetails = (name) => {
     // api to fetch Pokemon details by name
@@ -32,7 +32,7 @@ export function PokemonProvider({ children }) {
       const abilityRequests = response.data.abilities.map((ability) =>
         axios.get(ability.ability.url)
       );
-      //  axios.all will wait for all abilities details
+      // axios.all will wait for all abilities details
       // ability response stores the data of abilities in ability details
       axios.all(abilityRequests).then((abilityResponses) => {
         const abilityDetails = abilityResponses.map(
@@ -63,6 +63,7 @@ export function PokemonProvider({ children }) {
         pokemonDetails,
         abilities,
         forms,
+        fetchPokemonList,
       }}
     >
       {children}

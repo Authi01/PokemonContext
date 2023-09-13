@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import "./ProductDescriptionPage.css";
+import React, { useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import "../Product.css";
 import { usePokemonContext } from "../PokemonContext";
+import getImageUrl from "../ImageUrl";
 
 const ProductDescriptionPage = () => {
   const { name } = useParams();
@@ -10,41 +11,37 @@ const ProductDescriptionPage = () => {
 
   useEffect(() => {
     getPokemonDetails(name);
-  }, [name, getPokemonDetails]);
+  }, []);
 
   if (!pokemonDetails || !abilities || !forms) {
     return <div className="text-center mt-5">Loading...</div>;
   }
 
-  const getImageUrl = (id) => {
-    const paddedId = String(id).padStart(3, "0");
-    return `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${paddedId}.png`;
-  };
-
+  // If object ,function called using ? is undefined or null - it is set to undefined so that no error is thrown
   return (
     <div className="page-container">
       <div className="pokemon-card">
         <div className="pokemon-image">
           <img
-            src={getImageUrl(pokemonDetails.id)}
+            src={getImageUrl(pokemonDetails?.id)}
             className="img-fluid rounded"
-            alt={pokemonDetails.name}
+            alt={pokemonDetails?.name}
           />
         </div>
         <div className="pokemon-info">
-          <h1 className="title">{pokemonDetails.name}</h1>
+          <h1 className="title">{pokemonDetails?.name}</h1>
           <div className="details">
-            <strong>Height:</strong> {pokemonDetails.height} decimetres
+            <strong>Height:</strong> {pokemonDetails?.height} decimetres
           </div>
           <div className="details">
-            <strong>Weight:</strong> {pokemonDetails.weight} hectograms
+            <strong>Weight:</strong> {pokemonDetails?.weight} hectograms
           </div>
           <div className="details">
             <strong>Abilities:</strong>
             <ul>
-              {abilities.map((ability) => (
-                <li key={ability.name} className="list-item">
-                  {ability.name}
+              {abilities?.map((ability) => (
+                <li key={ability?.name} className="list-item">
+                  {ability?.name}
                 </li>
               ))}
             </ul>
@@ -52,13 +49,16 @@ const ProductDescriptionPage = () => {
           <div className="details">
             <strong>Forms:</strong>
             <ul>
-              {forms.map((form) => (
-                <li key={form.name} className="list-item">
-                  {form.name}
+              {forms?.map((form) => (
+                <li key={form?.name} className="list-item">
+                  {form?.name}
                 </li>
               ))}
             </ul>
           </div>
+          <Link to="/" className="back-link">
+            <button className="back-button">Back to PLP</button>
+          </Link>
         </div>
       </div>
     </div>
