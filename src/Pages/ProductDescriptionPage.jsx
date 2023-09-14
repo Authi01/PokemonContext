@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import "../Product.css";
 import { usePokemonContext } from "../PokemonContext";
-import getImageUrl from "../ImageUrl";
+import getImageUrl from "../utils/helper";
 
 const ProductDescriptionPage = () => {
   const { name } = useParams();

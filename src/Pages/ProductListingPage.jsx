@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import PokemonCard from "../components/PokemonCard";
 import "../Product.css";
 import { usePokemonContext } from "../PokemonContext";
-import getImageUrl from "../ImageUrl";
+import getImageUrl from "../utils/helper";
 
 const ProductListingPage = () => {
   // destructuring the result from context
